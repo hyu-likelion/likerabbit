@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <meta charset="UTF-8" />
+  </head>
+  <style>
+    body {
+      font-family: "Courier New", Courier, monospace;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      padding: 5px;
+      text-align: center;
+    }
+    input {
+      background-color: rgb(69, 69, 69);
+    }
+    td {
+      background-color: rgb(110, 110, 110);
+    }
+    text {
+      color: white;
+    }
+  </style>
+  <body>
+    <div style="display: flex; width: 100%; height: 100%;">
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <table border="1">
+          <tr>
+            <td colspan="4" style="background-color: rgb(69, 69, 69);">
+              <div
+                id="display"
+                type="text"
+                style="
+                  border: none;
+                  width: 200px;
+                  height: 30px;
+                  text-align: start;
+                  justify-content: center;
+                  padding: 5px;
+                "
+              ></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="background-color: rgb(69, 69, 69);">
+              <div
+                type="text"
+                style="
+                  border: none;
+                  width: 200px;
+                  height: 30px;
+                  text-align: start;
+                  justify-content: center;
+                  padding: 5px;
+                "
+                id="result"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td
+              onclick="reset()"
+              style="font-size: 10px; background-color: rgb(84, 84, 84);"
+            >
+              <div type="text" id="ac" style="color: white;">AC</div>
+            </td>
+            <td
+              onclick="sign()"
+              style="font-size: 7px; background-color: rgb(84, 84, 84);"
+            >
+              <text>+/-</text>
+            </td>
+            <td
+              onclick="expression('%')"
+              style="background-color: rgb(84, 84, 84);"
+            >
+              <text>%</text>
+            </td>
+            <td
+              onclick="expression('/')"
+              style="background-color: rgb(254, 141, 14);"
+            >
+              <text>/</text>
+            </td>
+          </tr>
+          <tr>
+            <td onclick="expression(7)"><text>7</text></td>
+            <td onclick="expression(8)"><text>8</text></td>
+            <td onclick="expression(9)"><text>9</text></td>
+            <td
+              onclick="expression('*')"
+              style="background-color: rgb(254, 141, 14);"
+            >
+              <text>X</text>
+            </td>
+          </tr>
+          <tr>
+            <td onclick="expression(4)"><text>4</text></td>
+            <td onclick="expression(5)"><text>5</text></td>
+            <td onclick="expression(6)"><text>6</text></td>
+            <td
+              onclick="expression('-')"
+              style="background-color: rgb(254, 141, 14);"
+            >
+              <text>-</text>
+            </td>
+          </tr>
+          <tr>
+            <td onclick="expression(1)"><text>1</text></td>
+            <td onclick="expression(2)"><text>2</text></td>
+            <td onclick="expression(3)"><text>3</text></td>
+            <td
+              onclick="expression('+')"
+              style="background-color: rgb(254, 141, 14);"
+            >
+              <text>+</text>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" onclick="expression(0)"><text>0</text></td>
+            <td onclick="expression('.')"><text>.</text></td>
+            <td
+              onclick="calculate()"
+              style="background-color: rgb(254, 141, 14);"
+            >
+              <text>=</text>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function expression(char) {
+        //change Ac to C
+        let ac = document.getElementById("ac");
+        ac.innerText = "C";
+        //key board func
+        //식 유효성 추가
+        let display = document.getElementById("display");
+        document.addEventListener("keydown", logKey);
+        function logKey(e) {
+          ac.innerText = "C";
+          console.log(e);
+          if (e.key == "Enter") {
+            calculate();
+          } else if (e.key >= 0 && e.key < 10) {
+            display.innerText += `${e.key}`;
+          } else if (
+            e.key == "%" ||
+            e.key == "/" ||
+            e.key == "*" ||
+            e.key == "-" ||
+            e.key == "+"
+          ) {
+            if (display.innerText[display.innerText.length - 1] == "+" ||
+            display.innerText[display.innerText.length - 1] == "/" ||
+            display.innerText[display.innerText.length - 1] == "%" ||
+            display.innerText[display.innerText.length - 1] == "-" ||
+            display.innerText[display.innerText.length - 1] == "." 
+            ) {
+            display.innerText = display.innerText;
+            }else if(display.innerText[display.innerText.length - 1] == "*" ){
+              if (e.key == "*") {
+              if (display.innerText[display.innerText.length - 2] != "*") {
+                display.innerText += `${e.key}`;
+              } else {
+                display.innerText = display.innerText;
+              }
+            } else {
+              display.innerText = display.innerText;
+            }
+            }else{
+              display.innerText += `${e.key}`;
+            } 
+          } else if (e.key == "Backspace") {
+            //display.innerText = display.innerText.slice(0, display.length - 2);
+            reset();
+          }
+        }
+        //click
+        if (typeof char === "string") {
+          if (display.innerText[display.innerText.length - 1] == "+") {
+            display.innerText = display.innerText;
+          } else if (display.innerText[display.innerText.length - 1] == "-") {
+            display.innerText = display.innerText;
+          } else if(display.innerText[display.innerText.length-1] =="."){
+            display.innerText = display.innerText;
+          }else if (display.innerText[display.innerText.length - 1] == "%") {
+            display.innerText = display.innerText;
+          } else if (display.innerText[display.innerText.length - 1] == "/") {
+            display.innerText = display.innerText;
+          } else if (display.innerText[display.innerText.length - 1] == "*") {
+            if (char == "*") {
+              if (display.innerText[display.innerText.length - 2] != "*") {
+                display.innerText = display.innerText + char;
+              } else {
+                display.innerText = display.innerText;
+              }
+            } else {
+              display.innerText = display.innerText;
+            }
+          } else {
+            display.innerText = display.innerText + char;
+          }
+        } else {
+          display.innerText = display.innerText + char;
+        }
+      }
+
+
+      function calculate() {
+        let result = document.getElementById("result");
+        let display = document.getElementById("display");
+        if (
+          display.innerText[display.innerText.length - 1] == "*" ||
+          display.innerText[display.innerText.length - 1] == "+" ||
+          display.innerText[display.innerText.length - 1] == "-" ||
+          display.innerText[display.innerText.length - 1] == "%" ||
+          display.innerText[display.innerText.length - 1] == "/"
+        ) {
+          alert("식이 이상해요.");
+        } else if (display.innerText.length == 0) {
+          alert("아무것도 없어요.");
+        } else {
+          result.innerText = eval(display.innerText);
+        }
+      }
+
+      function reset() {
+        let display = document.getElementById("display");
+        let result = document.getElementById("result");
+        let ac = document.getElementById("ac");
+        ac.innerText = "AC";
+        display.innerText = "";
+        result.innerText = "";
+      }
+
+      function sign() {
+        let result = document.getElementById("result");
+        if (result.innerText[0] == "-") {
+          result.innerText = result.innerText.substr(1);
+        } else {
+          result.innerText = "-" + result.innerText;
+        }
+      }
+    </script>
+  </body>
+</html>
