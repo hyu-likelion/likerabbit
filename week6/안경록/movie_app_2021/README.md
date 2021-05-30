@@ -1,8 +1,6 @@
-#Movie App 2021
 
-React JS Fundmentals Course (2019 Update!)
 
-#npx vs npm ??
+npx vs npm ??
 ---------------
 npm = Package Manager -> 관, 자바스크립트의 패키지 관리 묘둘이다.
 의존성과 패키지 관리를 위한 매니저이다. 누군가 우리의 프로젝트에 패키지 의존성을 설치할 때 npm install을 실행함으로 package.json 파일에 의존성을 지정할 수 있다. 또한 버전관리를 지원한다. 
@@ -18,17 +16,17 @@ npx는 의존성 라이브러리들이 전역이나 로컬에 설치되어있는
 
 보일러플레이트? : 변경없는 코드 들을 여러 곳에서 쓸 수 있음.
 
-#axios?
+axios?
 ---------
 보통 fetch()와 비교되곤 한다. fetch는 js 기본 빌트인 라이브러리이다. 다만 문법적으로 axios가 조금 더 compact하다.
 axios는 브라우저를 위한 http aysnc 통신 라이브러리이다. (보통 ajax와 같이 사용하기도 한다.)
 응답은 json으로 넘어온다.
 
-#ajax?
+ajax?
 -------
 ajax는 js의 빌트인 라이브러리이다. 브라우저가 가진 xmlhttpreq 객체를 이용해 전체 페이지를 새로 고치지 않고도 페이지의 일부만을 위한 데이터 로드 기법이다. 비동기 통신이다.
 
-#propTypes
+propTypes
 ------------
 react 에서 타입체크를 위해서 사용되는 라이브러리이다. 
 
