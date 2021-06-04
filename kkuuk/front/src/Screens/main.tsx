@@ -15,6 +15,11 @@ type memberProps = {
     name : string;
     callNum : string; 
 }
+type memberPointProps = {
+    name : string;
+    callNum : string;
+    point : number;
+}
 
 function Main({}:MainProps){
         var pk = 0; // 매장별 primary key
@@ -27,6 +32,11 @@ function Main({}:MainProps){
             name : "",
             callNum : ""
 
+        });
+        const [memberPoint, setMemberPoint] = useState<memberPointProps>({
+            name : "",
+            callNum : "",
+            point : 0,
         })
         
         //seller의 정보 조회
@@ -39,6 +49,13 @@ function Main({}:MainProps){
         const joinmemberHandler = (e:React.ChangeEvent<HTMLInputElement>) =>{
             setMember({
                 ...member,
+                [e.target.name] : e.target.value,
+            })
+        }
+
+        const memberPointHandler = (e:React.ChangeEvent<HTMLInputElement>) =>{
+            setMemberPoint({
+                ...memberPoint,
                 [e.target.name] : e.target.value,
             })
         }
@@ -67,11 +84,15 @@ function Main({}:MainProps){
                     <h3>적립</h3>
                     <p>전화번호(끝 4자리)<input type="text"/></p>
                     <button>조회</button>
+                    <p>적립액<input type="text" onChange={memberPointHandler} value={memberPoint.point*-1} name="point"/></p>
+                    <button>적립</button>
                 </div>
                 <div>
                     <h3>사용</h3>
                     <p>전화번호(끝 4자리)<input type="text"/></p>
                     <button>조회</button>
+                    <p>사용액<input type="text" onChange={memberPointHandler} value={memberPoint.point} name="point"/></p>
+                    <button>사용</button>
                 </div>
                 </div>
                 }

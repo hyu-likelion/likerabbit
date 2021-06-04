@@ -9,7 +9,7 @@ type signupProps = {
     password : string;
 }
 
-function SignUp({name,call,password}:signupProps){
+function SignUp({}:signupProps){
 
 
     //state
@@ -32,7 +32,7 @@ function SignUp({name,call,password}:signupProps){
         //2. name number valid
         //3. password valid
         //4. password correction valid
-        return false;
+        return true;
     }
     
 

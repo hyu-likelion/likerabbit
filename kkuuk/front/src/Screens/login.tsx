@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import {login} from "../Api/api.js";
 
 type loginProps = {
     name : string,
@@ -27,9 +28,11 @@ function Login({}:loginProps){
     return(
         <>
         <section className="container">
-            <p>업체명 : <input type="text" onChange={loginHandler} value={member.name} name="name"/></p>
+            <p>E-mail : <input type="text" onChange={loginHandler} value={member.name} name="name"/></p>
             <p>Password : <input type="text" onChange={loginHandler} value={member.password} name="password"/></p>
-            <button>로그인</button>
+            <button
+            onClick={()=>{login(member).then()}}
+            >로그인</button>
             {/*POST부분*/}
         </section>
         </>
