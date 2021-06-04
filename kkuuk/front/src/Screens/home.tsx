@@ -14,7 +14,6 @@ function Home({}:HomeProps){
         </section>
     )
 }
-    //state
 
 export default Home;
 

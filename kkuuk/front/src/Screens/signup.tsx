@@ -27,9 +27,14 @@ function SignUp({name,call,password}:signupProps){
     }
 
     const passwordCorrectHandler = ()=>{
-        //if(seller.password === )
+        //유효성검사 추가 중복 등.
+        //1. call number valid
+        //2. name number valid
+        //3. password valid
+        //4. password correction valid
+        return false;
     }
-    //유효성검사 추가 중복 등.
+    
 
         return(
             <section className="container">
@@ -42,14 +47,13 @@ function SignUp({name,call,password}:signupProps){
                 onClick={()=>
                     {       
                         //post
-                        console.log(seller);
-                        signup(seller).then(response=>response.data).then((data)=>{
-                            if(data.success){
-                                <Link to="/"/>
-                            }else{
-
-                            }
-                        })
+                        var flag  = passwordCorrectHandler();
+                        if(flag===true){
+                            signup(seller);
+                        }else{
+                            alert("x");
+                        }
+                        
                     }
                    
                    }>등록</button>
