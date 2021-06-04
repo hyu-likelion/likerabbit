@@ -2,6 +2,7 @@ from django.db import models
 
 class Store(models.Model):
     id = models.AutoField(primary_key=True) #업체별 고유번호 AutoField로 지정하면 번호가 순차적으로 자동 부여된다
+    email = models.EmailField(max_length=255)
     call = models.CharField(max_length=20)
     name = models.CharField(max_length=255)
     pwd = models.CharField(max_length=12)
@@ -14,8 +15,9 @@ class User(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='store_name')
+    is_deleted = models.BooleanField(default=False)
     
-class Histroy(models.Model):
+class History(models.Model):
     id = models.AutoField(primary_key=True)
     trade_type_choices = (
         ('save','적립'),
@@ -31,4 +33,8 @@ class Histroy(models.Model):
     val_stamp = models.IntegerField(default=0)
     after_stamp = models.IntegerField(default=0)
 
+class MemberShip(models.Model):
+    seller = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='seller')
+    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client')
+    stamp = models.IntegerField(default=0)
     

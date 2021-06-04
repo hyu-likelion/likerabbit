@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from kkuuk import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('kkuuk/', views.index), #views.py의 index 함수를 의미
 ]
